@@ -31,7 +31,7 @@ logger.setLevel(logging.ERROR)
 # ] codes add
 
 
-@Client.on_message(filters.private & filters.text & filters.incoming)
+@Client.on_message(filters.private | filters.text | filters.incoming)
 async def pm_search(client, message):
     await mdb.update_top_messages(message.from_user.id, message.text)
     bot_id = client.me.id
@@ -48,7 +48,7 @@ async def pm_search(client, message):
                                  reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("📝 ᴍᴏᴠɪᴇ ꜱᴇᴀʀᴄʜ ɢʀᴏᴜᴘ ", url=f'https://t.me/+5jSCIw22E2g5MGQ1')]]))
         
     
-@Client.on_message(filters.group & filters.text & filters.incoming)
+@Client.on_message(filters.group | filters.text | filters.incoming)
 async def group_search(client, message):
     #await message.react(emoji=random.choice(REACTIONS))
     await mdb.update_top_messages(message.from_user.id, message.text)
